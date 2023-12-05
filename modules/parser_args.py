@@ -13,37 +13,22 @@ def valid_port_number(value):
 def set_model_by_ram(ram, language, target_language):
     ram = ram.lower()
     if ram == "1gb":
-        if language == "en" or language == "English":
-            model = "tiny.en"
-        else:
-            model = "tiny"
+        model = "tiny.en" if language in ["en", "English"] else "tiny"
     elif ram == "2gb":
-        if language == "en" or language == "English":
-            model = "base.en"
-        else:
-            model = "base"
+        model = "base.en" if language in ["en", "English"] else "base"
     elif ram == "4gb":
-        if language == "en" or language == "English":
-            model = "small.en"
-        else:
-            model = "small"
+        model = "small.en" if language in ["en", "English"] else "small"
     elif ram == "6gb":
-        if language == "en" or language == "English":
-            model = "medium.en"
-        else:
-            model = "medium"
+        model = "medium.en" if language in ["en", "English"] else "medium"
     elif ram == "12gb":
         model = "large-v3"
-        if language == "en" or language == "English":
+        if language in ["en", "English"]:
             red_text = Fore.RED + Back.BLACK
             green_text = Fore.GREEN + Back.BLACK
             yellow_text = Fore.YELLOW + Back.BLACK
             reset_text = Style.RESET_ALL
             print(f"{red_text}WARNING{reset_text}: {yellow_text}12gb{reset_text} is overkill for English. Do you want to swap to {green_text}6gb{reset_text} model? If you are transcribing a language other than English, you can ignore this warning and press {green_text}n{reset_text}.")
-            if input("y/n: ").lower() == "y":
-                model = "medium.en"
-            else:
-                model = "large-v3"
+            model = "medium.en" if input("y/n: ").lower() == "y" else "large-v3"
     else:
         raise ValueError("Invalid RAM setting provided")
 
@@ -88,8 +73,7 @@ def parse_arguments():
     parser.add_argument("--stream_translate", action='store_true', help="Translate the stream.")
     parser.add_argument("--stream_transcribe", action='store_true', help="Transcribe the stream.")
     parser.add_argument("--cookies", default=None, help="Path to cookies.txt file. In NetScape format.")
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 print("Args Module Loaded")

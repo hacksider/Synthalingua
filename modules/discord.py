@@ -20,6 +20,5 @@ def send_to_discord_webhook(webhook_url, text):
                 print("Discord webhook is being rate limited.")
     except:
         print("Failed to send message to Discord webhook.")
-        pass
 
 print("Discord Module Loaded")
