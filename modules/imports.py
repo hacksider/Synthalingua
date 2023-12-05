@@ -49,7 +49,7 @@ try:
 except Exception as e:
     print("Error Loading Primary Imports")
     print("Check to make sure you have all the required modules installed.")
-    print("Error: " + str(e))
+    print(f"Error: {str(e)}")
     sys.exit(1)
 
 
